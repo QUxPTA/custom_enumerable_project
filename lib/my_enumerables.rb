@@ -1,5 +1,15 @@
 module Enumerable
   # Your code goes here
+  def my_select
+    return to_enum(:my_select) unless block_given?
+
+    result = []
+    my_each do |element|
+      result << element if yield(element)
+    end
+
+    result
+  end
 end
 
 # You will first have to define my_each
