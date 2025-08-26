@@ -61,6 +61,26 @@ module Enumerable
 
     result
   end
+
+  def my_inject(initial = nil)
+    # Set accumulator
+    if initial.nil?
+      accumulator = first
+      skip_first = true
+    else
+      accumulator = initial
+      skip_first = false
+    end
+
+    my_each_with_index do |element, index|
+      # Skip first element if used as accumulator
+      next if skip_first && index == 0
+
+      accumulator = yield(accumulator, element)
+    end
+
+    accumulator
+  end
 end
 
 # You will first have to define my_each
