@@ -10,6 +10,19 @@ module Enumerable
 
     result
   end
+
+  def my_all?
+    if block_given?
+      my_each do |element|
+        return false unless yield(element)
+      end
+    else
+      my_each do |element|
+        return false unless element
+      end
+    end
+    true
+  end
 end
 
 # You will first have to define my_each
